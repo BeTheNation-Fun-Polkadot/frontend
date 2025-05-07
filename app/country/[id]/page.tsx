@@ -14,7 +14,7 @@ import {
 import { parseEther } from "viem";
 import {
   CONTRACT_ADDRESSES,
-  MockUSDC_ABI,
+  PredictionMarket_ABI,
   USDC_ADDRESSES,
   USDC_ABI,
 } from "@/lib/contracts/constants";
@@ -466,7 +466,6 @@ function ClosePositionModal({
     </div>
   );
 }
-
 export default function CountryPage() {
   const { id } = useParams();
   const country = countryData[id as keyof typeof countryData];
@@ -483,7 +482,29 @@ export default function CountryPage() {
   const [closeStep, setCloseStep] = useState<1 | 2 | 3 | 4 | null>(null);
 
   const { writeContract, data: hash, isPending } = useWriteContract();
-  const { isLoading: isConfirming } = useWaitForTransactionReceipt({ hash });
+  const { isLoading: isConfirming, isSuccess, isError, error } = useWaitForTransactionReceipt({ hash });
+
+  // Log transaction status changes
+  useEffect(() => {
+    if (hash) {
+      console.log('📝 Transaction hash:', hash);
+      console.log('⏳ Transaction status: Waiting for confirmation...');
+    }
+  }, [hash]);
+
+  useEffect(() => {
+    if (isSuccess && hash) {
+      console.log('✅ Transaction successful!', hash);
+      console.log('Transaction confirmed and executed successfully');
+    }
+  }, [isSuccess, hash]);
+
+  useEffect(() => {
+    if (isError && hash) {
+      console.log('❌ Transaction failed!', hash);
+      console.log('Error details:', error);
+    }
+  }, [isError, hash, error]);
 
   const { address } = useAccount();
   const { data: walletBalance, refetch: refetchBalance } = useBalance({
@@ -494,8 +515,8 @@ export default function CountryPage() {
 
   // Use the hook unconditionally
   const { refetch: refetchPositionFromHook } = useReadContract({
-    address: CONTRACT_ADDRESSES[50002],
-    abi: MockUSDC_ABI,
+    address: CONTRACT_ADDRESSES[1287],
+    abi: PredictionMarket_ABI,
     functionName: "getPosition",
     args: [] as const,
     account: address, // Use account instead of enabled
@@ -511,6 +532,7 @@ export default function CountryPage() {
 
   useEffect(() => {
     if (hash && !isConfirming) {
+      console.log('🔄 Transaction completed, updating UI...');
       const savedSize = position.size; // Save the size before resetting
       setPosition({
         size: savedSize, // Keep the size
@@ -524,10 +546,12 @@ export default function CountryPage() {
         ?.scrollIntoView({ behavior: "smooth" });
 
       const timer = setTimeout(() => {
+        console.log('🔄 Refreshing balance and positions...');
         refetchBalance().catch((err) =>
           console.error("Failed to refresh balance:", err)
         );
         triggerRefresh();
+        console.log('✅ Refresh complete');
       }, 3500);
 
       return () => clearTimeout(timer);
@@ -546,24 +570,29 @@ export default function CountryPage() {
 
   const handlePlaceTrade = async () => {
     try {
+      console.log('🚀 Starting trade process...');
       if (!id || typeof id !== "string") {
+        console.error('❌ Missing country ID');
         throw new Error("Country ID is required");
       }
 
       if (!address) {
+        console.error('❌ Wallet not connected');
         throw new Error("Wallet not connected");
       }
 
       const sizeInWei = parseEther(
         (Number(position.size) * Number(position.leverage)).toString()
       );
-      console.log("Approving", sizeInWei, "tokens");
+      console.log("💰 Approving", sizeInWei, "tokens");
+      console.log(`📊 Trade details: Size=${position.size}, Leverage=${position.leverage}, Direction=${position.isLong ? 'Long' : 'Short'}`);
 
       // Generate unique trade ID
       const newTradeId = `trade-${Date.now()}-${Math.random()
         .toString(36)
         .substr(2, 9)}`;
       setTradeId(newTradeId);
+      console.log('🔑 Generated trade ID:', newTradeId);
 
       // Add trade to history immediately when placing
       addTrade({
@@ -580,23 +609,28 @@ export default function CountryPage() {
         },
         status: "Open",
       });
+      console.log('📝 Added trade to history');
 
       // 1. Approve contract to use token
+      console.log('⏳ Sending token approval transaction...');
       const approvalTx = await writeContract({
-        address: USDC_ADDRESSES[50002],
+        address: USDC_ADDRESSES[1287],
         abi: USDC_ABI,
         functionName: "approve",
-        args: [CONTRACT_ADDRESSES[50002], sizeInWei],
+        args: [CONTRACT_ADDRESSES[1287], sizeInWei],
       });
-      console.log("Approval TX:", approvalTx);
+      console.log("✅ Approval TX sent:", approvalTx);
 
       // Wait for approval confirmation
+      console.log('⏳ Waiting for approval confirmation...');
       await new Promise((resolve) => setTimeout(resolve, 2000));
+      console.log('✅ Approval wait period complete');
 
       // 2. Open Position
+      console.log('⏳ Sending open position transaction...');
       const tradeTx = await writeContract({
-        address: CONTRACT_ADDRESSES[50002],
-        abi: MockUSDC_ABI,
+        address: CONTRACT_ADDRESSES[1287],
+        abi: PredictionMarket_ABI,
         functionName: "openPosition",
         args: [
           id,
@@ -606,21 +640,35 @@ export default function CountryPage() {
         ],
         value: sizeInWei,
       });
-      console.log("Trade TX:", tradeTx);
+      console.log("✅ Trade TX sent:", tradeTx);
+      console.log("📊 Complete transaction details:", {
+        countryId: id,
+        direction: position.isLong ? 'Long (0)' : 'Short (1)',
+        leverage: Number(position.leverage),
+        size: sizeInWei.toString(),
+        chainId: 1287,
+        contractAddress: CONTRACT_ADDRESSES[1287]
+      });
 
       // Refresh position data explicitly
-      refetchPosition().catch((err) =>
-        console.error("Failed to refresh position:", err)
-      );
-      refetchBalance().catch((err: Error) =>
-        console.error("Failed to refresh balance:", err)
-      );
+      console.log('🔄 Refreshing position data...');
+      refetchPosition().catch((err) => {
+        console.error("❌ Failed to refresh position:", err);
+      });
+      refetchBalance().catch((err: Error) => {
+        console.error("❌ Failed to refresh balance:", err);
+      });
       triggerRefresh();
+      console.log('✅ Data refresh initiated');
     } catch (error) {
-      console.error("Error placing trade:", error);
+      console.error("❌ ERROR PLACING TRADE:", error);
+      console.log("📊 Transaction failed with the following details:");
       if (error instanceof Error) {
+        console.error("Error message:", error.message);
+        console.error("Error stack:", error.stack);
         alert("Failed to trade: " + error.message);
       } else {
+        console.error("Unknown error format:", JSON.stringify(error));
         alert("Failed to trade: " + JSON.stringify(error));
       }
     }
@@ -931,18 +979,18 @@ export default function CountryPage() {
 
                     <div className="self-stretch px-6 inline-flex justify-between items-center">
                       {[
-                        "28 April",
-                        "29 April",
-                        "30 April",
-                        "1 May",
-                        "2 May",
-                        "3 May",
-                        "4 May",
-                        "5 May",
-                        "6 May",
-                        "7 May",
-                        "8 May",
-                        "9 May",
+                        // "28 April",
+                        // "29 April",
+                        // "30 April",
+                        // "1 May",
+                        // "2 May",
+                        // "3 May",
+                        // "4 May",
+                        // "5 May",
+                        // "6 May",
+                        // "7 May",
+                        // "8 May",
+                        // "9 May",
                       ].map((date) => (
                         <div
                           key={date}
@@ -1096,7 +1144,7 @@ export default function CountryPage() {
                       } text-xl font-bold font-['Inter'] leading-tight`}
                     />
                     <div className="text-[#d6d6d6] text-xl font-bold font-['Inter'] leading-tight">
-                      PHA
+                      DEV
                     </div>
                   </div>
                   <div className="self-stretch py-6 relative inline-flex justify-start items-center gap-3">
