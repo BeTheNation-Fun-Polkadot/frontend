@@ -1,20 +1,20 @@
 import { defineChain } from 'viem'
 
-export const westendAssetHub = defineChain({
-    id: 420420421,
-    name: 'Westend Asset Hub',
+export const moonbaseAlpha = defineChain({
+    id: 1287,
+    name: 'Moonbase Alpha',
     nativeCurrency: {
         decimals: 18,
-        name: 'Westend',
-        symbol: 'WND',
+        name: 'DEV',
+        symbol: 'DEV',
     },
     rpcUrls: {
         default: {
-            http: ['https://westend-asset-hub-eth-rpc.polkadot.io'],
-            webSocket: ['wss://westend-asset-hub-eth-rpc.polkadot.io'],
+            http: ['https://rpc.moonbase.moonbeam.network'],
+            webSocket: ['wss://rpc.moonbase.moonbeam.network'],
         },
     },
     blockExplorers: {
-        default: { name: 'Explorer', url: 'https://polkadot.js.org/apps' },
+        default: { name: 'Moonscan', url: 'https://moonbase.moonscan.io' },
     },
 })

@@ -1,19 +1,19 @@
 import { Address } from "viem";
-import MockUSDC_ABI_Imported from "./MockUSDC.json";
+import PredictionMarketJSON from "./PredictionMarket.json";
 
 // Address of Trading Contract
 export const CONTRACT_ADDRESSES: Record<number, Address> = {
-  // Westend Asset Hub deployment
-  420420421: "0x2904921988f84BBD764D585e6f0249869FDEb25C", // address of trading contract
+  // Moonbase Alpha deployment
+  1287: "0x1f3BDC315DF0e5C03Ef134FcB173D4607Cac460D", // Replace with actual contract address
 };
 
-// Token Address WND
+// Token Address 
 export const USDC_ADDRESSES: Record<number, Address> = {
-  420420421: "0x2904921988f84BBD764D585e6f0249869FDEb25C", // Replace with actual token address
+  1287: "0x1f3BDC315DF0e5C03Ef134FcB173D4607Cac460D", // Replace with actual token address
 };
 
 // Use the actual contract ABI
-export const MockUSDC_ABI = [
+export const PredictionMarket_ABI = [
   {
     inputs: [
       { internalType: "string", name: "countryId", type: "string" },
@@ -38,16 +38,6 @@ export const MockUSDC_ABI = [
     type: "function",
   },
   {
-    //   inputs: [
-    //     { internalType: "uint256", name: "takeProfit", type: "uint256" },
-    //     { internalType: "uint256", name: "stopLoss", type: "uint256" },
-    //   ],
-    //   name: "setTPSL",
-    //   outputs: [],
-    //   stateMutability: "nonpayable",
-    //   type: "function",
-    // },
-    // {
     inputs: [],
     name: "getPosition",
     outputs: [
@@ -83,7 +73,6 @@ export const MockUSDC_ABI = [
     type: "function",
   },
   {
-    // ERC20InsufficientAllowance error definition from OpenZeppelin
     type: "error",
     name: "ERC20InsufficientAllowance",
     inputs: [
@@ -94,5 +83,8 @@ export const MockUSDC_ABI = [
   },
 ] as const;
 
+// Export MockUSDC_ABI for compatibility with existing code
+export const MockUSDC_ABI = PredictionMarket_ABI;
+
 // Export imported JSON if needed
-export const USDC_ABI = MockUSDC_ABI_Imported;
+export const USDC_ABI = PredictionMarketJSON;
