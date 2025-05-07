@@ -5,6 +5,7 @@ import Image from "next/image";
 // import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useRouter } from "next/navigation";
 // import { useEffect } from "react";
+import { motion } from "framer-motion";
 
 export default function LandingPage() {
   // const { openConnectModal } = useConnectModal();
@@ -23,72 +24,188 @@ export default function LandingPage() {
         </div>
 
         <div className="max-w-12xl mx-auto">
-          <div className="max-w-7xl mx-auto text-center mt-[120px] mb-16">
-            <h1 className="font-bold mb-8 leading-tight tracking-tight">
-              <div className="self-stretch text-center mb-[40px] bg-gradient-to-b from-[#f1f1ef] to-[#f1f1ef]/15 text-transparent tracking-[-3%] bg-clip-text justify-start text-[#f1f1ef] text-[68px] font-medium font-['Inter'] leading-[75.14px]">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-7xl mx-auto text-center mb-16"
+          >
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="font-bold mb-8 leading-tight tracking-tight"
+            >
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 0.4 }}
+                className="self-stretch text-center mb-[40px] bg-gradient-to-b from-[#f1f1ef] to-[#f1f1ef]/15 text-transparent tracking-[-3%] bg-clip-text justify-start text-[#f1f1ef] text-[68px] font-medium font-['Inter'] leading-[75.14px]"
+              >
                 First Perpetual Prediction Market Don&apos;t Bet But Trade Your
                 Country
-              </div>
-            </h1>
-            <p className="w-flex text-center justify-center text-[#8b8b8b] text-lg font-normal font-['Inter'] leading-7">
+              </motion.div>
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="w-flex text-center justify-center text-[#8b8b8b] text-lg font-normal font-['Inter'] leading-7"
+            >
               Unlock the power of perpetual contracts based on a country's
               progress, with predictions driven by key indicators such as GDP,
               inflation, currency rates and more. Trade long or short, with no
               time limits on your positions.
-            </p>
+            </motion.p>
 
-            <div className="flex justify-center mt-[80px]">
-              <button
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              className="flex justify-center mt-[80px]"
+            >
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => router.push("/dashboard")}
-                className="justify-center text-white text-2xl font-medium font-['Inter'] leading-loose px-[26px] py-[16.25px] bg-gradient-to-br from-[#111214] to-[#22242a] rounded-[100px] shadow-[-12px_-12px_24px_0px_rgba(21,94,239,0.24)] shadow-[12px_12px_24px_0px_rgba(255,175,41,0.24)] outline outline-[3px] outline-[#155dee] inline-flex justify-center items-center gap-[13px] overflow-hidden"
+                className="
+                  bg-[#3b82f6] 
+                  hover:bg-[#2563eb] 
+                  text-white 
+                  px-8 
+                  py-4 
+                  rounded-full 
+                  text-2xl
+                  font-medium
+                  transition-all 
+                  duration-300
+                  transform 
+                  hover:scale-105
+                  shadow-[0_0_15px_rgba(59,130,246,0.5)]
+                  hover:shadow-[0_0_25px_rgba(59,130,246,0.8)]
+                  relative
+                  overflow-hidden
+                  group
+                "
               >
-                Start Trading Now
-              </button>
-            </div>
-          </div>
+                <span className="relative z-10">Start Trading Now</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </motion.button>
+            </motion.div>
+          </motion.div>
 
           {/* Enhanced dashboard preview with improved effects */}
-          <div className="relative mx-auto max-w-4xl mt-20 ">
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.8 }}
+            className="relative mx-auto max-w-4xl mt-20"
+          >
             {/* Enhanced platform glow effect */}
-            <div className="absolute -inset-6 -rotate-180 bg-gradient-to-b from-[#ffaf29] to-[#155dee] outline outline-1 outline-offset-[-0.50px] outline-black blur-[200px]"></div>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.2, delay: 1 }}
+              className="absolute -inset-6 -rotate-180 bg-gradient-to-b from-[#ffaf29] to-[#155dee] outline outline-1 outline-offset-[-0.50px] outline-black blur-[200px]"
+            />
 
             {/* Platform container with improved shadows and borders */}
-            <div className="w-full aspect-[16.5/14.2] bg-gradient-to-b from-[#0A1428] via-[#1A2036] to-[#1A1510] rounded-xl overflow-hidden shadow-[0_0_100px_rgba(30,64,175,0.3)] border border-blue-900/40">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ 
+                type: "keyframes",
+                duration: 1,
+                times: [0, 0.5, 1],
+                keyframes: [0.95, 1.02, 1]
+              }}
+              
+              className="w-full aspect-[16.5/14.2] bg-gradient-to-b from-[#0A1428] via-[#1A2036] to-[#1A1510] rounded-xl overflow-hidden shadow-[0_0_100px_rgba(30,64,175,0.3)] border border-blue-900/40"
+            >
               {/* Platform image */}
-              <div className="absolute inset-0 flex items-center justify-center">
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ 
+                  type: "tween",
+                  duration: 1,
+                  ease: "easeOut"
+                }}
+                className="absolute inset-0 flex items-center justify-center"
+              >
                 <Image
-                  src="/BeTheNation3.png"
+                  src="/BeTheNation4.png"
                   alt="Trading dashboard preview"
                   fill
                   className="object-cover"
                   priority
                 />
-              </div>
-            </div>
-          </div>
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       {/* Why We're Different Section */}
       <section className="py-20 mt-60 px-4 relative">
-        <div className="max-w-7xl mx-auto">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="max-w-7xl mx-auto"
+        >
           <div className="flex flex-col md:flex-row gap-10">
             {/* Left side heading with updated typography */}
-            <div className="md:w-1/4 mb-12 md:mb-0 flex flex-col">
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="md:w-1/4 mb-12 md:mb-0 flex flex-col"
+            >
               <h2 className="font-bold leading-tight">
                 <div className="w-[394px] justify-start bg-gradient-to-b from-[#f1f1ef] to-[#f1f1ef]/20 text-[#f1f1ef] text-[68px] text-transparent bg-clip-text font-medium font-['Inter'] tracking-[-3%] leading-[75.14px]">
                   Why We&apos;re Different: A New Era of Trading
                 </div>
               </h2>
-            </div>
+            </motion.div>
+
             {/* Right side feature card grid */}
             <div className="md:w-3/4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Card 2: Empty space or future card */}
+              <motion.div 
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={{
+                  visible: {
+                    opacity: 1,
+                    transition: {
+                      staggerChildren: 0.2
+                    }
+                  },
+                  hidden: {
+                    opacity: 0
+                  }
+                }}
+                className="grid grid-cols-1 md:grid-cols-2 gap-6"
+              >
+                {/* Empty space card */}
                 <div className="bg-transparent rounded-xl hidden md:block"></div>
-                {/* Card 1: Hold positions */}
-                <div className="self-stretch h-[337px] p-6 bg-[#202122]/60 rounded-2xl shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06)] shadow-[0px_1px_3px_0px_rgba(16,24,40,0.10)] outline outline-1 outline-offset-[-1px] outline-[#323232] inline-flex flex-col justify-start items-start gap-6 overflow-hidden">
-                  <div className="h-14 w-14 rounded-2xl bg-blue-500/30 flex items-center justify-center">
+
+                {/* Feature Cards - Each wrapped in motion.div */}
+                <motion.div
+                  variants={{
+                    visible: { opacity: 1, y: 0 },
+                    hidden: { opacity: 0, y: 50 }
+                  }}
+                  className="self-stretch h-[337px] p-6 bg-[#202122]/60 rounded-2xl shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06)] shadow-[0px_1px_3px_0px_rgba(16,24,40,0.10)] outline outline-1 outline-offset-[-1px] outline-[#323232] inline-flex flex-col justify-start items-start gap-6 overflow-hidden hover:bg-[#202122]/80 transition-all duration-300"
+                >
+                  {/* Card 1 content */}
+                  <motion.div 
+                    whileHover={{ scale: 1.05 }}
+                    className="h-14 w-14 rounded-2xl bg-blue-500/30 flex items-center justify-center"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -101,8 +218,13 @@ export default function LandingPage() {
                         clipRule="evenodd"
                       />
                     </svg>
-                  </div>
-                  <div className="self-stretch flex flex-col justify-start items-start gap-6">
+                  </motion.div>
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                    className="self-stretch flex flex-col justify-start items-start gap-6"
+                  >
                     <div className="self-stretch inline-flex justify-start items-center gap-4">
                       <div className="flex-1 justify-start text-[#f1f1ef] text-2xl bg-gradient-to-b from-[#f1f1ef] to-[#f1f1ef]/20 text-[#f1f1ef] text-transparent bg-clip-text font-medium font-['Inter'] leading-7">
                         Hold your position indefinitely
@@ -116,11 +238,23 @@ export default function LandingPage() {
                         as long
                       </div>
                     </div>
-                  </div>
-                </div>
+                  </motion.div>
+                </motion.div>
+
+                {/* Repeat similar motion.div structure for other cards */}
                 {/* Card 3: Trade based on economic indicators */}
-                <div className="self-stretch h-[337px] p-6 bg-[#202122]/60 rounded-2xl shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06)] shadow-[0px_1px_3px_0px_rgba(16,24,40,0.10)] outline outline-1 outline-offset-[-1px] outline-[#323232] inline-flex flex-col justify-start items-start gap-6 overflow-hidden">
-                  <div className="h-14 w-14 rounded-2xl bg-blue-500/30 flex items-center justify-center">
+                <motion.div
+                  variants={{
+                    visible: { opacity: 1, y: 0 },
+                    hidden: { opacity: 0, y: 50 }
+                  }}
+                  className="self-stretch h-[337px] p-6 bg-[#202122]/60 rounded-2xl shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06)] shadow-[0px_1px_3px_0px_rgba(16,24,40,0.10)] outline outline-1 outline-offset-[-1px] outline-[#323232] inline-flex flex-col justify-start items-start gap-6 overflow-hidden hover:bg-[#202122]/80 transition-all duration-300"
+                >
+                  {/* Card content remains the same but wrapped in motion elements */}
+                  <motion.div 
+                    whileHover={{ scale: 1.05 }}
+                    className="h-14 w-14 rounded-2xl bg-blue-500/30 flex items-center justify-center"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -133,8 +267,13 @@ export default function LandingPage() {
                         clipRule="evenodd"
                       />
                     </svg>
-                  </div>
-                  <div className="self-stretch flex flex-col justify-start items-start gap-6">
+                  </motion.div>
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                    className="self-stretch flex flex-col justify-start items-start gap-6"
+                  >
                     <div className="self-stretch inline-flex justify-start items-center gap-4">
                       <div className="flex-1 justify-start text-[#f1f1ef] text-2xl font-medium flex-1 justify-start text-[#f1f1ef] text-2xl bg-gradient-to-b from-[#f1f1ef] to-[#f1f1ef]/20 text-[#f1f1ef] text-transparent bg-clip-text font-medium font-['Inter'] leading-7">
                         Trade based on key economic indicators.
@@ -147,12 +286,22 @@ export default function LandingPage() {
                         indicators such as GDP, inflation.
                       </div>
                     </div>
-                  </div>
-                </div>
+                  </motion.div>
+                </motion.div>
 
                 {/* Card 4: Maximize profit potential */}
-                <div className="self-stretch h-[337px] p-6 bg-[#202122]/60 rounded-2xl shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06)] shadow-[0px_1px_3px_0px_rgba(16,24,40,0.10)] outline outline-1 outline-offset-[-1px] outline-[#323232] inline-flex flex-col justify-start items-start gap-6 overflow-hidden">
-                  <div className="h-14 w-14 rounded-2xl bg-blue-500/30 flex items-center justify-center">
+                <motion.div
+                  variants={{
+                    visible: { opacity: 1, y: 0 },
+                    hidden: { opacity: 0, y: 50 }
+                  }}
+                  className="self-stretch h-[337px] p-6 bg-[#202122]/60 rounded-2xl shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06)] shadow-[0px_1px_3px_0px_rgba(16,24,40,0.10)] outline outline-1 outline-offset-[-1px] outline-[#323232] inline-flex flex-col justify-start items-start gap-6 overflow-hidden hover:bg-[#202122]/80 transition-all duration-300"
+                >
+                  {/* Card content remains the same but wrapped in motion elements */}
+                  <motion.div 
+                    whileHover={{ scale: 1.05 }}
+                    className="h-14 w-14 rounded-2xl bg-blue-500/30 flex items-center justify-center"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -165,8 +314,13 @@ export default function LandingPage() {
                         clipRule="evenodd"
                       />
                     </svg>
-                  </div>
-                  <div className="self-stretch flex flex-col justify-start items-start gap-6">
+                  </motion.div>
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                    className="self-stretch flex flex-col justify-start items-start gap-6"
+                  >
                     <div className="self-stretch inline-flex justify-start items-center gap-4">
                       <div className="flex-1 justify-start text-[#f1f1ef] text-2xl flex-1 justify-start text-[#f1f1ef] text-2xl bg-gradient-to-b from-[#f1f1ef] to-[#f1f1ef]/20 text-[#f1f1ef] text-transparent bg-clip-text font-medium font-['Inter'] leading-7">
                         Maximize your potential returns
@@ -179,50 +333,110 @@ export default function LandingPage() {
                         you're trading on economic growth or decline.
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
+                  </motion.div>
+                </motion.div>
+              </motion.div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Stay Ahead of the Market Section - Improved with full-width container and centered text */}
       <section className="py-20 mt-40 px-4 relative">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="self-stretch text-center mb-[24px] bg-gradient-to-b from-[#f1f1ef] to-[#f1f1ef]/15 text-transparent tracking-[-3%] bg-clip-text justify-start text-[#f1f1ef] text-[68px] font-medium font-['Inter'] leading-[75.14px]">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.2 }}
+          className="max-w-6xl mx-auto text-center"
+        >
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.2, delay: 0.2 }}
+            className="self-stretch text-center mb-[24px] bg-gradient-to-b from-[#f1f1ef] to-[#f1f1ef]/15 text-transparent tracking-[-3%] bg-clip-text justify-start text-[#f1f1ef] text-[68px] font-medium font-['Inter'] leading-[75.14px]"
+          >
             Stay Ahead of the Market with Real-Time Data
-          </div>
-        </div>
-        <div className="self-stretch px-[122px] py-12 inline-flex flex-col justify-center items-start gap-8">
-          <div className="self-stretch h-[337px] p-12 bg-gradient-to-r from-black/0 to-black/20 rounded-2xl shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06)] shadow-[0px_1px_3px_0px_rgba(16,24,40,0.10)] outline outline-1 outline-offset-[-1px] outline-[#323232] inline-flex justify-start items-start gap-6 overflow-hidden">
-            <div className="flex-1 self-stretch inline-flex flex-col justify-start items-start gap-6">
-              <div className="bg-gradient-to-b from-[#f1f1ef] to-[#f1f1ef]/15  text-transparent tracking-[-3%] bg-clip-text justify-start text-[#f1f1ef] text-[64px] font-medium font-['Inter'] leading-[70px]">
+          </motion.div>
+        </motion.div>
+
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.2, delay: 0.8 }}
+          className="self-stretch px-[122px] py-12 inline-flex flex-col justify-center items-start gap-8"
+        >
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.2, delay: 0.8 }}
+            className="self-stretch h-[337px] p-12 bg-gradient-to-r from-black/0 to-black/20 rounded-2xl shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06)] shadow-[0px_1px_3px_0px_rgba(16,24,40,0.10)] outline outline-1 outline-offset-[-1px] outline-[#323232] inline-flex justify-start items-start gap-6 overflow-hidden"
+          >
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.2, delay: 0.8  }}
+              className="flex-1 self-stretch inline-flex flex-col justify-start items-start gap-6"
+            >
+              <motion.div 
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.2, delay: 1 }}
+                className="bg-gradient-to-b from-[#f1f1ef] to-[#f1f1ef]/15 text-transparent tracking-[-3%] bg-clip-text justify-start text-[#f1f1ef] text-[64px] font-medium font-['Inter'] leading-[70px]"
+              >
                 Live
                 <br />
                 Leaderboard
-              </div>
-              <div className="w-[613px] flex-1 justify-start text-[#777777] text-base font-medium font-['Inter'] leading-7">
+              </motion.div>
+              <motion.div 
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.2, delay: 1.2 }}
+                className="w-[613px] flex-1 justify-start text-[#777777] text-base font-medium font-['Inter'] leading-7"
+              >
                 See how top traders are performing. Check out profit/loss
                 rankings and accuracy rates of traders who have successfully
                 predicted country trends.
-              </div>
-            </div>
-            <div className="w-[538px] p-6 bg-[#1d1f22] rounded-3xl shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06)] shadow-[0px_1px_3px_0px_rgba(16,24,40,0.10)] outline outline-1 outline-offset-[-1px] outline-[#202327] inline-flex flex-col justify-start items-start gap-5">
-              <div className="self-stretch inline-flex justify-start items-center gap-4">
+              </motion.div>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 1 }}
+              className="w-[538px] p-6 bg-[#1d1f22] rounded-3xl shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06)] shadow-[0px_1px_3px_0px_rgba(16,24,40,0.10)] outline outline-1 outline-offset-[-1px] outline-[#202327] inline-flex flex-col justify-start items-start gap-5"
+            >
+              {/* Leaderboard content with staggered animations */}
+              <motion.div 
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 1.2 }}
+                className="self-stretch inline-flex justify-start items-center gap-4"
+              >
                 <div className="flex-1 justify-start text-white text-lg font-medium font-['Inter'] leading-7">
                   Leaderboard
                 </div>
                 <div className="w-6 h-6 relative overflow-hidden">
                   <div className="w-0.5 h-4 left-[11px] top-[4px] absolute outline outline-2 outline-offset-[-1px] outline-[#99a3b2]" />
                 </div>
-              </div>
-              <div className="self-stretch inline-flex justify-start items-center gap-4">
-                <div className="flex-1 justify-start text-[#676767] text-lg font-medium font-['Inter'] leading-7">
-                  You are ranked 167th in Indonesia
-                </div>
-              </div>
-              <div className="self-stretch relative bg-[#202122] flex flex-col justify-start items-start">
+              </motion.div>
+
+              {/* Animate each leaderboard entry */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 1.4 }}
+                className="self-stretch relative bg-[#202122] flex flex-col justify-start items-start"
+              >
                 <div className="self-stretch h-px relative">
                   <div className="w-[490px] h-px left-0 top-0 absolute bg-[#323232]" />
                 </div>
@@ -325,11 +539,25 @@ export default function LandingPage() {
                 <div className="self-stretch h-px relative" />
                 <div className="self-stretch h-px relative" />
                 <div className="w-[1366.50px] h-[250px] left-[-738px] top-[50px] absolute opacity-25 bg-gradient-to-b from-[#155dee] to-[#ffaf29] outline outline-[0.72px] outline-offset-[-0.36px] outline-black blur-[36.01px]" />
-              </div>
-            </div>
-          </div>
-          <div className="self-stretch inline-flex justify-start items-center gap-8 flex-wrap content-center">
-            <div className="flex-1 h-[337px] p-6 relative bg-[#202122]/60 rounded-2xl shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06)] shadow-[0px_1px_3px_0px_rgba(16,24,40,0.10)] outline outline-1 outline-offset-[-1px] outline-[#323232] inline-flex flex-col justify-center items-start gap-6 overflow-hidden">
+              </motion.div>
+            </motion.div>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 1.6 }}
+            className="self-stretch inline-flex justify-start items-center gap-8 flex-wrap content-center"
+          >
+            {/* Bottom cards with staggered animations */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 1.8 }}
+              className="flex-1 h-[337px] p-6 relative bg-[#202122]/60 rounded-2xl shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06)] shadow-[0px_1px_3px_0px_rgba(16,24,40,0.10)] outline outline-1 outline-offset-[-1px] outline-[#323232] inline-flex flex-col justify-center items-start gap-6 overflow-hidden"
+            >
               <div className="w-[284px] flex flex-col justify-start items-start gap-6">
                 <div className="w-[284px] inline-flex justify-start items-center gap-4">
                   <div className="w-[290px] bg-gradient-to-b from-[#f1f1ef] to-[#f1f1ef]/15 text-transparent tracking-[-3%] bg-clip-text justify-start text-[#f1f1ef] text-[32px] font-medium font-['Inter'] leading-[38px]">
@@ -474,8 +702,15 @@ export default function LandingPage() {
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="flex-1 h-[337px] p-6 relative bg-[#202122]/60 rounded-2xl shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06)] shadow-[0px_1px_3px_0px_rgba(16,24,40,0.10)] outline outline-1 outline-offset-[-1px] outline-[#323232] inline-flex flex-col justify-center items-start gap-6 overflow-hidden">
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 2 }}
+              className="flex-1 h-[337px] p-6 relative bg-[#202122]/60 rounded-2xl shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06)] shadow-[0px_1px_3px_0px_rgba(16,24,40,0.10)] outline outline-1 outline-offset-[-1px] outline-[#323232] inline-flex flex-col justify-center items-start gap-6 overflow-hidden"
+            >
               <div className="self-stretch flex flex-col justify-start items-start gap-6">
                 <div className="w-[221px] inline-flex justify-start items-center gap-4">
                   <div className="w-[221px] bg-gradient-to-b from-[#f1f1ef] to-[#f1f1ef]/15 text-transparent tracking-[-3%] bg-clip-text justify-start text-[#f1f1ef] text-[32px] font-medium font-['Inter'] leading-[38px]">
@@ -553,38 +788,90 @@ export default function LandingPage() {
                 </div>
               </div>
               <div className="w-[1366.50px] h-[600.50px] left-[-437.50px] top-[-600px] absolute opacity-25 bg-gradient-to-b from-[#155dee] to-[#ffaf29] outline outline-[0.72px] outline-offset-[-0.36px] outline-black blur-[36.01px]" />
-            </div>
-          </div>
-        </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </section>
 
-      {/* Final CTA Section - Updated to match reference exactly */}
+      {/* Final CTA Section - Updated with Framer Motion animations */}
       <section className="mt-40 py-16 px-4 relative">
         <div className="max-w-6xl mx-auto text-center">
           {/* Background glow effect */}
-          <div className="absolute top-60 w-[1078px] h-[543px] bg-[radial-gradient(ellipse_62.33%_62.33%_at_50.00%_50.00%,_rgba(21,_94,_239,_0.60)_0%,_rgba(255,_175,_41,_0.60)_100%)] rounded-full blur-[150px]"></div>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2 }}
+            className="absolute top-60 w-[1078px] h-[543px] bg-[radial-gradient(ellipse_62.33%_62.33%_at_50.00%_50.00%,_rgba(21,_94,_239,_0.60)_0%,_rgba(255,_175,_41,_0.60)_100%)] rounded-full blur-[150px]"
+          />
 
           {/* Content with border and subtle glass effect */}
-          <div className="relative bg-[#111214]/40 rounded-2xl outline outline-1 outline-offset-[-1px] outline-[#323232] p-8 md:p-12 shadow-[0_4px_30px_rgba(0,0,0,0.2)]">
-            <div className="self-stretch text-center mb-[40px] bg-gradient-to-b from-[#f1f1ef] to-[#f1f1ef]/15 text-transparent tracking-[-3%] bg-clip-text justify-start text-[#f1f1ef] text-[68px] font-medium font-['Inter'] leading-[75.14px]">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="relative bg-[#111214]/40 rounded-2xl outline outline-1 outline-offset-[-1px] outline-[#323232] p-8 md:p-12 shadow-[0_4px_30px_rgba(0,0,0,0.2)]"
+          >
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="self-stretch text-center mb-[40px] bg-gradient-to-b from-[#f1f1ef] to-[#f1f1ef]/15 text-transparent tracking-[-3%] bg-clip-text justify-start text-[#f1f1ef] text-[68px] font-medium font-['Inter'] leading-[75.14px]"
+            >
               Join The Economic Revolution Today.
-            </div>
+            </motion.div>
 
-            <p className="text-[#8b8b8b] mb-10 max-w-[1027px] mx-auto text-base">
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="text-[#8b8b8b] mb-10 max-w-[1027px] mx-auto text-base"
+            >
               Unlock the power of perpetual contracts based on a country's
               progress, with predictions driven by key indicators such as GDP,
               inflation, currency exchange, and more. Trade long or short, with
               no expiration on your positions.
-            </p>
+            </motion.p>
 
-            {/* CTA button with golden glow effect */}
-            <button
+            {/* CTA button with enhanced animations */}
+            <motion.button
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              whileHover={{ 
+                scale: 1.05,
+                transition: { duration: 0.2 }
+              }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
               onClick={() => router.push("/dashboard")}
-              className="justify-center text-white text-2xl font-medium font-['Inter'] leading-loose px-[28px] py-[12px] bg-gradient-to-br from-[#111214] to-[#22242a] rounded-[100px] shadow-[-12px_-12px_24px_0px_rgba(21,94,239,0.24)] shadow-[12px_12px_24px_0px_rgba(255,175,41,0.24)] outline outline-[2px] outline-[#155dee] inline-flex justify-center items-center gap-[13px] overflow-hidden"
+              className="
+                bg-[#3b82f6] 
+                hover:bg-[#2563eb] 
+                text-white 
+                px-8 
+                py-4 
+                rounded-full 
+                text-2xl
+                font-medium
+                transition-all 
+                duration-300
+                transform 
+                hover:scale-105
+                shadow-[0_0_15px_rgba(59,130,246,0.5)]
+                hover:shadow-[0_0_25px_rgba(59,130,246,0.8)]
+                relative
+                overflow-hidden
+                group
+              "
             >
-              Sign Up Now and Start Trading!
-            </button>
-          </div>
+              <span className="relative z-10">Start Trading Now</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </motion.button>
+          </motion.div>
         </div>
       </section>
 
