@@ -57,10 +57,29 @@ export function ConnectWalletButton() {
                 return (
                   <button
                     type="button"
-                    className="px-[20.82px] py-[13.01px] bg-gradient-to-br from-[#111214] to-[#22242a] rounded-[80.08px] shadow-[-9.609195709228516px_-9.609195709228516px_19.21839141845703px_0px_rgba(21,94,239,0.24)] shadow-[9.609195709228516px_9.609195709228516px_19.21839141845703px_0px_rgba(255,175,41,0.24)] outline outline-[2.40px] outline-[#155dee] inline-flex justify-center items-center gap-[10.41px] overflow-hidden text-white"
+                    className="
+                      bg-[#3b82f6] 
+                      hover:bg-[#2563eb] 
+                      text-white 
+                      px-8 
+                      py-4 
+                      rounded-full 
+                      text-2xl
+                      font-medium
+                      transition-all 
+                      duration-300
+                      transform 
+                      hover:scale-105
+                      shadow-[0_0_15px_rgba(59,130,246,0.5)]
+                      hover:shadow-[0_0_25px_rgba(59,130,246,0.8)]
+                      relative
+                      overflow-hidden
+                      group
+                    "
                     onClick={openConnectModal}
                   >
-                    Connect Wallet
+                    <span className="relative z-10">Connect Wallet</span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </button>
                 );
               }
